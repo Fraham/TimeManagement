@@ -132,15 +132,19 @@ namespace TimeManagement.TimeManagement_XamlTypeInfo
 
         private void InitTypeTables()
         {
-            _typeNameTable = new string[3];
+            _typeNameTable = new string[5];
             _typeNameTable[0] = "TimeManagement.MainPage";
             _typeNameTable[1] = "Windows.UI.Xaml.Controls.Page";
             _typeNameTable[2] = "Windows.UI.Xaml.Controls.UserControl";
+            _typeNameTable[3] = "TimeManagement.Models.TimedProject";
+            _typeNameTable[4] = "Object";
 
-            _typeTable = new global::System.Type[3];
+            _typeTable = new global::System.Type[5];
             _typeTable[0] = typeof(global::TimeManagement.MainPage);
             _typeTable[1] = typeof(global::Windows.UI.Xaml.Controls.Page);
             _typeTable[2] = typeof(global::Windows.UI.Xaml.Controls.UserControl);
+            _typeTable[3] = typeof(global::TimeManagement.Models.TimedProject);
+            _typeTable[4] = typeof(global::System.Object);
         }
 
         private int LookupTypeIndexByName(string typeName)
@@ -176,6 +180,7 @@ namespace TimeManagement.TimeManagement_XamlTypeInfo
         }
 
         private object Activate_0_MainPage() { return new global::TimeManagement.MainPage(); }
+        private object Activate_3_TimedProject() { return new global::TimeManagement.Models.TimedProject(); }
 
         private global::Windows.UI.Xaml.Markup.IXamlType CreateXamlType(int typeIndex)
         {
@@ -190,6 +195,7 @@ namespace TimeManagement.TimeManagement_XamlTypeInfo
             case 0:   //  TimeManagement.MainPage
                 userType = new global::TimeManagement.TimeManagement_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
                 userType.Activator = Activate_0_MainPage;
+                userType.AddMemberName("TimeProject");
                 userType.SetIsLocalType();
                 xamlType = userType;
                 break;
@@ -201,16 +207,47 @@ namespace TimeManagement.TimeManagement_XamlTypeInfo
             case 2:   //  Windows.UI.Xaml.Controls.UserControl
                 xamlType = new global::TimeManagement.TimeManagement_XamlTypeInfo.XamlSystemBaseType(typeName, type);
                 break;
+
+            case 3:   //  TimeManagement.Models.TimedProject
+                userType = new global::TimeManagement.TimeManagement_XamlTypeInfo.XamlUserType(this, typeName, type, GetXamlTypeByName("Object"));
+                userType.SetIsReturnTypeStub();
+                userType.SetIsLocalType();
+                xamlType = userType;
+                break;
+
+            case 4:   //  Object
+                xamlType = new global::TimeManagement.TimeManagement_XamlTypeInfo.XamlSystemBaseType(typeName, type);
+                break;
             }
             return xamlType;
         }
 
 
+        private object get_0_MainPage_TimeProject(object instance)
+        {
+            var that = (global::TimeManagement.MainPage)instance;
+            return that.TimeProject;
+        }
+        private void set_0_MainPage_TimeProject(object instance, object Value)
+        {
+            var that = (global::TimeManagement.MainPage)instance;
+            that.TimeProject = (global::TimeManagement.Models.TimedProject)Value;
+        }
 
         private global::Windows.UI.Xaml.Markup.IXamlMember CreateXamlMember(string longMemberName)
         {
             global::TimeManagement.TimeManagement_XamlTypeInfo.XamlMember xamlMember = null;
-            // No Local Properties
+            global::TimeManagement.TimeManagement_XamlTypeInfo.XamlUserType userType;
+
+            switch (longMemberName)
+            {
+            case "TimeManagement.MainPage.TimeProject":
+                userType = (global::TimeManagement.TimeManagement_XamlTypeInfo.XamlUserType)GetXamlTypeByName("TimeManagement.MainPage");
+                xamlMember = new global::TimeManagement.TimeManagement_XamlTypeInfo.XamlMember(this, "TimeProject", "TimeManagement.Models.TimedProject");
+                xamlMember.Getter = get_0_MainPage_TimeProject;
+                xamlMember.Setter = set_0_MainPage_TimeProject;
+                break;
+            }
             return xamlMember;
         }
     }

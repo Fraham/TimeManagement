@@ -7,7 +7,32 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Page.Resources>
+        
+    </Page.Resources>
 
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <GridView x:Name="gridView" Grid.Row="0"  HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,0">
+            <StackPanel Orientation="Horizontal">
+                <TextBox x:Name="txtDisplay" Text="{Binding TimeProject.TotalTime, Mode=TwoWay}" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top"  Margin="20,0" />
+                <Button x:Name="btnAdd" Content="Add" Height="30" Width="100" Click="AddNewTimedSession" Margin="20,0"/>
+            </StackPanel>
+        </GridView>
+        <GridView x:Name="gridView2" Grid.Row="1"  HorizontalAlignment="Left" VerticalAlignment="Top">
+            <ListView x:Name="ListView" >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <TimePicker x:Name="tpStart" Time="{Binding StartTime, Mode=TwoWay}"  Width="100" Margin="20,0"/>
+                            <TimePicker x:Name="tpEnd" Time="{Binding EndTime, Mode=TwoWay}"  Width="100" Margin="20,0"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </GridView>
     </Grid>
 </Page>

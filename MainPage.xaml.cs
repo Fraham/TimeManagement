@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using TimeManagement.Models;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -13,8 +16,6 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
-
 namespace TimeManagement
 {
     /// <summary>
@@ -22,9 +23,44 @@ namespace TimeManagement
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        private TimedProject timeProject = new TimedProject();
+
         public MainPage()
         {
             this.InitializeComponent();
+
+            NewSession();
+
+            ListView.ItemsSource = timeProject.Sessions;
+        }
+
+        private void AddNewTimedSession(object sender, RoutedEventArgs e)
+        {
+            NewSession();
+        }
+
+        private void NewSession()
+        {
+            TimeProject.Sessions.Add(new TimedSession());
+
+            var f = TimeProject.TotalTime;
+            txtDisplay.Text = TimeProject.TotalTime;
+        }
+
+        public TimedProject TimeProject
+        {
+            get
+            {
+                if (timeProject == null)
+                {
+                    timeProject = new TimedProject();
+                }
+                return timeProject;
+            }
+            set
+            {
+                timeProject = value;
+            }
         }
     }
 }

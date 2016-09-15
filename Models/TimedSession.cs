@@ -29,13 +29,11 @@ namespace TimeManagement.Models
         {
             if (StartTime == null || EndTime == null)
             {
-                ElapsedTime = TimeSpan.ParseExact("00:00:00", "HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
+                ElapsedTime = new TimeSpan(0);
             }
             else
             {
                 ElapsedTime = EndTime - StartTime;
-
-                Debug.WriteLine(ElapsedTimeText);
             }
         }
 
@@ -47,7 +45,7 @@ namespace TimeManagement.Models
             {
                 if (startTime == null)
                 {
-                    startTime = TimeSpan.ParseExact("00:00:00", "HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
+                    startTime = new TimeSpan(0);
                 }
 
                 return startTime;
@@ -57,7 +55,7 @@ namespace TimeManagement.Models
             {
                 if (value == null)
                 {
-                    value = TimeSpan.ParseExact("00:00:00", "HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
+                    value = new TimeSpan(0);
                 }
 
                 startTime = value;
@@ -84,7 +82,7 @@ namespace TimeManagement.Models
             {
                 if (endTime == null)
                 {
-                    endTime = TimeSpan.ParseExact("00:00:00", "HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
+                    endTime = new TimeSpan(0);
                 }
 
                 return endTime;
@@ -147,8 +145,6 @@ namespace TimeManagement.Models
                 try
                 {
                     return elapsedTime.ToString();
-                    //return elapsedTime.ToString("g");
-                    //return elapsedTime.Hours.ToString("##") + ":" + elapsedTime.Minutes.ToString("##");
                 }
                 catch (FormatException FE)
                 {

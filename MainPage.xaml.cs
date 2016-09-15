@@ -43,7 +43,6 @@ namespace TimeManagement
         {
             TimeProject.Sessions.Add(new TimedSession());
 
-            var f = TimeProject.TotalTime;
             txtDisplay.Text = TimeProject.TotalTime;
         }
 
@@ -61,6 +60,11 @@ namespace TimeManagement
             {
                 timeProject = value;
             }
+        }
+
+        private void TimeChanged(object sender, TimePickerValueChangedEventArgs e)
+        {
+            txtDisplay.Text = TimeProject.TotalTime;
         }
     }
 }

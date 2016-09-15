@@ -27,8 +27,8 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
-                            <TimePicker x:Name="tpStart" Time="{Binding StartTime, Mode=TwoWay}"  Width="100" Margin="20,0"/>
-                            <TimePicker x:Name="tpEnd" Time="{Binding EndTime, Mode=TwoWay}"  Width="100" Margin="20,0"/>
+                            <TimePicker x:Name="tpStart" Time="{Binding StartTime, Mode=TwoWay}"  Margin="20,0" MaxWidth="50" TimeChanged="TimeChanged"/>
+                            <TimePicker x:Name="tpEnd" Time="{Binding EndTime, Mode=TwoWay}"  Margin="20,0" MaxWidth="50" TimeChanged="TimeChanged"/>
                         </StackPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>

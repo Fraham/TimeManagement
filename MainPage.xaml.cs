@@ -66,5 +66,12 @@ namespace TimeManagement
         {
             txtDisplay.Text = TimeProject.TotalTime;
         }
+
+        private void ClearSessions(object sender, RoutedEventArgs e)
+        {
+            TimeProject.Sessions.Clear();
+
+            TimeProject.Sessions.Add(new TimedSession());
+        }
     }
 }

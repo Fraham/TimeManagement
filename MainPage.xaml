@@ -12,6 +12,7 @@
     </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
         <Grid.RowDefinitions>
             <RowDefinition Height="40" />
             <RowDefinition Height="*" />
@@ -20,16 +21,49 @@
             <StackPanel Orientation="Horizontal">
                 <TextBox x:Name="txtDisplay" Text="{Binding TimeProject.TotalTime, Mode=TwoWay}" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top"  Margin="20,0" />
                 <Button x:Name="btnAdd" Content="Add" Height="30" Width="100" Click="AddNewTimedSession" Margin="20,0"/>
+                <Button x:Name="btnClear" Content="Clear" Height="30" Width="100" Click="ClearSessions" Margin="20,0"/>
             </StackPanel>
         </GridView>
         <GridView x:Name="gridView2" Grid.Row="1"  HorizontalAlignment="Left" VerticalAlignment="Top">
             <ListView x:Name="ListView" >
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel Orientation="Horizontal">
-                            <TimePicker x:Name="tpStart" Time="{Binding StartTime, Mode=TwoWay}"  Margin="20,0" MaxWidth="50" TimeChanged="TimeChanged"/>
-                            <TimePicker x:Name="tpEnd" Time="{Binding EndTime, Mode=TwoWay}"  Margin="20,0" MaxWidth="50" TimeChanged="TimeChanged"/>
-                        </StackPanel>
+                        <UserControl>
+                            <RelativePanel>
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup>
+                                        <VisualState x:Name="Narrow">
+                                            <VisualState.StateTriggers>
+                                                <AdaptiveTrigger MinWindowWidth="0" />
+                                            </VisualState.StateTriggers>
+                                            <VisualState.Setters>
+                                                <Setter Target="StartBlock.(RelativePanel.AlignLeftWithPanel)" Value="True"/>
+                                                <Setter Target="EndBlock.(RelativePanel.AlignLeftWithPanel)" Value="True"/>
+                                                <Setter Target="EndBlock.(RelativePanel.Below)" Value="StartBlock" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                        <VisualState x:Name="Wide">
+                                            <VisualState.StateTriggers>
+                                                <AdaptiveTrigger MinWindowWidth="720" />
+                                            </VisualState.StateTriggers>
+                                            <VisualState.Setters>
+                                                <Setter Target="StartBlock.(RelativePanel.AlignLeftWithPanel)" Value="True"/>
+                                                <Setter Target="EndBlock.(RelativePanel.AlignRightWithPanel)" Value="True"/>
+                                                <Setter Target="EndBlock.(RelativePanel.RightOf)" Value="StartBlock" />
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+                                <StackPanel x:Name="StartBlock" Orientation="Horizontal" Margin="10,10" RelativePanel.AlignLeftWithPanel="True">
+                                    <TextBlock Text="Start:" Margin="15,0"/>
+                                    <TimePicker x:Name="tpStart" Time="{Binding StartTime, Mode=TwoWay}"  Margin="20,0" MaxWidth="50" TimeChanged="TimeChanged"/>
+                                </StackPanel>
+                                <StackPanel x:Name="EndBlock" Orientation="Horizontal" Margin="10,10" RelativePanel.RightOf="StartBlock">
+                                    <TextBlock Text="End:" Margin="15,0"/>
+                                    <TimePicker x:Name="tpEnd" Time="{Binding EndTime, Mode=TwoWay}"  Margin="20,0" MaxWidth="50" TimeChanged="TimeChanged"/>
+                                </StackPanel>
+                            </RelativePanel>
+                        </UserControl>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>

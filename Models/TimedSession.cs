@@ -115,7 +115,7 @@ namespace TimeManagement.Models
                 }
                 catch (FormatException FE)
                 {
-
+                    FE.ToString();
                 }
             }
         }

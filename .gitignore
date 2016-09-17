@@ -260,3 +260,5 @@ __pycache__/
 *.pyc
 obj/
 obj/x86/Debug/MainPage.g.cs
+obj/x86/Debug/XamlSaveStateFile.xml
+obj/x86/Debug/MainPage.g.cs
